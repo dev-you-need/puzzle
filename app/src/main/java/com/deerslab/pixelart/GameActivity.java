@@ -12,19 +12,20 @@ public class GameActivity extends Activity {
     private GameView gameView;
     private Game game;
 
+    protected static Activity activity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        activity = this;
+
         gameView = new GameView(this);
         game = Game.getInstance(this, gameView);
 
-        setContentView(gameView);
-    }
+        game.create();
 
-    protected void startLevelChooserActivity(){
-        startActivity(new Intent(GameActivity.this, LevelChooserActivity.class));
-        finish();
+        setContentView(gameView);
     }
 
     @Override
@@ -32,4 +33,8 @@ public class GameActivity extends Activity {
         startActivity(new Intent(GameActivity.this, LevelChooserActivity.class));
         finish();
     }
+
+
 }
+
+

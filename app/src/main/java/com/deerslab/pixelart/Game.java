@@ -6,6 +6,9 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -14,21 +17,26 @@ import java.util.Random;
  */
 public class Game {
 
-    private GameView gameView;
-    private Context context;
+    private static GameView gameView;
+    private static Context context;
     private static Game instance;
 
-    protected static GameState gameState;
+    protected GameState gameState;
     protected static int currentLevel;
 
-    protected static int picPartsX = 4;
-    protected static int picPartsY = 3;
-    protected static boolean[][] picPartsCatch = new boolean[picPartsX][picPartsY];
-    protected static int[][] picPartsField = new int[picPartsX][2*picPartsY];
+    protected int picPartsX = 4;
+    protected int picPartsY = 3;
+    protected boolean[][] picPartsCatch = new boolean[picPartsX][picPartsY];
+    protected int[][] picPartsField = new int[picPartsX][2*picPartsY];
 
-    protected static boolean alreadyChoose;
-    protected static int[] partXYchoose = new int[2];
+    protected boolean alreadyChoose;
+    protected int[] partXYchoose = new int[2];
     private int valueChoose;
+
+    Tracker tracker;
+    String TAG = this.getClass().getSimpleName();
+
+    protected int clicks;
 
     public Game(Context context, GameView gameView) {
         this.context = context;
@@ -38,6 +46,13 @@ public class Game {
     }
 
     public void create(){
+
+        gameDifficultSetter(currentLevel);
+
+        picPartsCatch = new boolean[picPartsX][picPartsY];
+        picPartsField = new int[picPartsX][2*picPartsY];
+        partXYchoose = new int[2];
+        clicks = 0;
 
         ArrayList<Integer>usedCells = new ArrayList<Integer>();
         Random random = new Random();
@@ -65,6 +80,16 @@ public class Game {
         gameState = GameState.MainGame;
 
         Log.d("usedCells size", usedCells.size()+"");
+
+
+        try {
+            tracker = AnalyticsTrackers.getTracker(context).get(AnalyticsTrackers.Target.APP);
+            tracker.setScreenName(TAG);
+            tracker.send(new HitBuilders.EventBuilder().setAction("Level " + currentLevel + " start").build());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public void click(int coordX, int coordY){
@@ -117,6 +142,8 @@ public class Game {
                             alreadyChoose = true;
                         }
                     }
+
+                    clicks++;
                 }
 
                 if (endGameCheck()) {
@@ -134,7 +161,9 @@ public class Game {
                 break;
 
             case Win:
+                GameActivity.activity.finish();
                 context.startActivity(new Intent(context, LevelChooserActivity.class));
+
                 break;
         }
     }
@@ -147,12 +176,67 @@ public class Game {
                 }
             }
         }
+
+        try {
+            tracker.send(new HitBuilders.EventBuilder().setAction("Level " + currentLevel + " finish").build());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         return true;
     }
 
-    public static Game getInstance(Context context, GameView gameView) {
+    private void gameDifficultSetter(int currentLevel){
+        switch (currentLevel){
+            case 1:
+                picPartsX=3;
+                picPartsY=3;
+                break;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+                picPartsX=4;
+                picPartsY=3;
+                break;
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+                picPartsX=4;
+                picPartsY=4;
+                break;
+            case 11:
+            case 12:
+            case 13:
+            case 14:
+            case 15:
+                picPartsX=5;
+                picPartsY=4;
+                break;
+            case 16:
+            case 17:
+            case 18:
+            case 19:
+            case 20:
+                picPartsX=5;
+                picPartsY=5;
+                break;
+            default:
+                picPartsX=4;
+                picPartsY=3;
+                break;
+        }
+
+    }
+
+    public static Game getInstance(Context context1, GameView gameView1) {
         if (instance == null) {
-            instance = new Game(context, gameView);
+            instance = new Game(context1, gameView1);
+        } else {
+            context = context1;
+            gameView = gameView1;
         }
         return instance;
     }

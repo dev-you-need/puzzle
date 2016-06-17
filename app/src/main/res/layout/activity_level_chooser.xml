@@ -15,108 +15,108 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:text="@string/chooseLevel"
-            android:id="@+id/textView"
+            android:id="@+id/tvChooseLevel"
             android:layout_weight="1"
-            android:gravity="center" />
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="#ffffff" />
     </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        >
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel1"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel2"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel3"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel4"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel5"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
 
-        <ImageButton
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel6"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
-
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel7"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel8"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel9"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel10"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
 
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="New ImageButton"
-            android:id="@+id/idBtnLevel11"
-            android:layout_weight="1" />
-
-        <ImageButton
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:text="New ImageButton"
-            android:id="@+id/idBtnLevel12"
-            android:layout_weight="1" />
     </LinearLayout>
 
     <LinearLayout
@@ -125,46 +125,92 @@
         android:layout_height="match_parent"
         android:layout_weight="1">
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel11"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel12"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel13"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel14"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel15"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel16"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel17"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
 
-        <ImageButton
+        <ImageView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="New ImageButton"
+            android:text="New ImageView"
             android:id="@+id/idBtnLevel18"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel19"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel20"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
     </LinearLayout>
 </LinearLayout>

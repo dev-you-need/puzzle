@@ -5,7 +5,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 
@@ -15,7 +17,9 @@ import android.view.View;
 public class GameView extends View {
 
     private Context context;
+    private Game game;
     private final Paint paint = new Paint();
+    private Typeface font;
 
     private int width;
     private int height;
@@ -33,6 +37,10 @@ public class GameView extends View {
     protected int picPartSizeY;
     private int picPartPreviewSizeX;
     private int picPartPreviewSizeY;
+    private int winX;
+    private int winY;
+    private int winWidth;
+    private int winHeight;
 
     private Bitmap mainPic;
     private Bitmap[][] picParts;
@@ -42,7 +50,7 @@ public class GameView extends View {
 
     //for win animation process;
     private boolean firstTimeAnim = true;
-    private final long ANIMATIONTIME = 1000000000;
+    private final long ANIMATIONTIME = 500000000; //0.5 sec
     private long animationStartTime;
 
 
@@ -50,16 +58,26 @@ public class GameView extends View {
         super(context);
         setOnTouchListener(new GameTouchListener(context, this));
         this.context = context;
+
+        Resources resources = context.getResources();
+        font = Typeface.createFromAsset(resources.getAssets(), "font.ttf");
+        paint.setTypeface(font);
+        paint.setAntiAlias(true);
+
+        game = Game.getInstance(context, this);
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        switch (Game.gameState) {
+        drawBackgrounds(canvas);
+
+        switch (game.gameState) {
             case MainGame:
                 drawPicPreview(canvas);
                 drawGameField(canvas);
+                drawScoreField(canvas);
                 break;
             case Win:
                 winAnimation(canvas);
@@ -98,30 +116,42 @@ public class GameView extends View {
         gameFieldY = borderSize/2;
         gameFieldX = width - gameField - borderSize/2;
 
-        picPartSizeX = gameField/Game.picPartsX;
-        picPartSizeY = gameField/(2*Game.picPartsY);
+        picPartSizeX = gameField/game.picPartsX;
+        picPartSizeY = gameField/(2*game.picPartsY);
 
-        picPartPreviewSizeX = picPreviewWidth /Game.picPartsX;
-        picPartPreviewSizeY = picPreviewHeight /Game.picPartsY;
+        picPartPreviewSizeX = picPreviewWidth /game.picPartsX;
+        picPartPreviewSizeY = picPreviewHeight /game.picPartsY;
 
-        picParts = new Bitmap[Game.picPartsX][Game.picPartsY];
-        picPartsPreview = new Bitmap[Game.picPartsX][Game.picPartsY];
+        if (width - borderSize > 2*(height - borderSize)){
+            winY = borderSize/2;
+            winHeight = height - borderSize;
+            winWidth = winHeight*2;
+            winX = (width - winWidth)/2;
+        } else {
+            winX = borderSize/2;
+            winWidth = width - borderSize;
+            winHeight = winWidth/2;
+            winY = (height - winHeight)/2;
+        }
+
+        picParts = new Bitmap[game.picPartsX][game.picPartsY];
+        picPartsPreview = new Bitmap[game.picPartsX][game.picPartsY];
 
         Bitmap pic = Bitmap.createScaledBitmap(mainPic, gameField, gameField/2, false);
         Log.d("pic.width=", pic.getWidth()+"");
         Log.d("pic.height=", pic.getHeight()+"");
 
-        for (int x=0; x<Game.picPartsX; x++) {
-            for (int y = 0; y < Game.picPartsY; y++) {
-                picParts[x][y] = Bitmap.createBitmap(pic, x*(pic.getWidth()/Game.picPartsX), y*(pic.getHeight()/Game.picPartsY), picPartSizeX, picPartSizeY);
+        for (int x=0; x<game.picPartsX; x++) {
+            for (int y = 0; y < game.picPartsY; y++) {
+                picParts[x][y] = Bitmap.createBitmap(pic, x*(pic.getWidth()/game.picPartsX), y*(pic.getHeight()/game.picPartsY), picPartSizeX, picPartSizeY);
             }
         }
         pic.recycle();
 
         picPreview = Bitmap.createScaledBitmap(mainPic, picPreviewWidth, picPreviewHeight, false);
-        for (int x=0; x<Game.picPartsX; x++) {
-            for (int y = 0; y < Game.picPartsY; y++) {
-               picPartsPreview[x][y] = Bitmap.createBitmap(picPreview, x*(picPreview.getWidth()/Game.picPartsX), y*(picPreview.getHeight()/Game.picPartsY), picPartPreviewSizeX, picPartPreviewSizeY);
+        for (int x=0; x<game.picPartsX; x++) {
+            for (int y = 0; y < game.picPartsY; y++) {
+               picPartsPreview[x][y] = Bitmap.createBitmap(picPreview, x*(picPreview.getWidth()/game.picPartsX), y*(picPreview.getHeight()/game.picPartsY), picPartPreviewSizeX, picPartPreviewSizeY);
             }
         }
 
@@ -133,9 +163,9 @@ public class GameView extends View {
     private void drawPicPreview(Canvas canvas){
 
 
-        for (int x=0; x<Game.picPartsX; x++) {
-            for (int y = 0; y < Game.picPartsY; y++) {
-                if (Game.picPartsCatch[x][y]) {
+        for (int x=0; x<game.picPartsX; x++) {
+            for (int y = 0; y < game.picPartsY; y++) {
+                if (game.picPartsCatch[x][y]) {
                     canvas.drawBitmap(picPartsPreview[x][y], scoreFieldX + x * picPartPreviewSizeX, picFieldY + y * picPartPreviewSizeY, paint);
                 }
             }
@@ -144,22 +174,36 @@ public class GameView extends View {
 
     private void drawGameField(Canvas canvas){
         int currentPart;
-        for (int x=0; x<Game.picPartsX; x++) {
-            for (int y = 0; y < 2*Game.picPartsY; y++) {
+        for (int x=0; x<game.picPartsX; x++) {
+            for (int y = 0; y < 2*game.picPartsY; y++) {
                 //canvas.drawBitmap(picParts[x][y], gameFieldX + x*picPartSizeX, gameFieldY + y*picPartSizeY, paint);
 //                Log.d("draw partX=", x+"");
 //                Log.d("draw partY=", y+"");
-                currentPart = Game.picPartsField[x][y];
+                currentPart = game.picPartsField[x][y];
 //                Log.d("currentPart", currentPart+"");
-                if (!Game.picPartsCatch[currentPart % Game.picPartsX][currentPart / Game.picPartsX]) {
-                    canvas.drawBitmap(picParts[currentPart % Game.picPartsX][currentPart / Game.picPartsX], gameFieldX + x * picPartSizeX, gameFieldY + y * picPartSizeY, paint);
+                if (!game.picPartsCatch[currentPart % game.picPartsX][currentPart / game.picPartsX]) {
+                    canvas.drawBitmap(picParts[currentPart % game.picPartsX][currentPart / game.picPartsX], gameFieldX + x * picPartSizeX, gameFieldY + y * picPartSizeY, paint);
                 }
             }
         }
 
-        if (Game.alreadyChoose){
-            canvas.drawBitmap(choosePic, gameFieldX + Game.partXYchoose[0] * picPartSizeX, gameFieldY + Game.partXYchoose[1] * picPartSizeY, paint);
+        if (game.alreadyChoose){
+            canvas.drawBitmap(choosePic, gameFieldX + game.partXYchoose[0] * picPartSizeX, gameFieldY + game.partXYchoose[1] * picPartSizeY, paint);
         }
+    }
+
+    private void drawScoreField(Canvas canvas){
+        /*paint.setColor(Color.argb(0, 72, 87, 159));
+        canvas.drawRect(scoreFieldX, scoreFieldY, scoreFieldX+picPreviewWidth, scoreFieldY+scoreFieldHeight, paint);
+        */
+        paint.setTextSize(scoreFieldHeight/5);
+        paint.setColor(Color.WHITE);
+        paint.setTextAlign(Paint.Align.LEFT);
+        canvas.drawText(getResources().getString(R.string.clicks) + ": " + game.clicks, scoreFieldX+borderSize, scoreFieldY+borderSize*2+scoreFieldHeight/10, paint);
+    }
+
+    private void drawBackgrounds(Canvas canvas){
+        canvas.drawARGB(80, 102, 204, 255);
     }
 
     private void winAnimation(Canvas canvas){
@@ -172,13 +216,20 @@ public class GameView extends View {
         double shift = (currentTime - animationStartTime)/ANIMATIONTIME;
         if (shift < 1){
             Bitmap temp = Bitmap.createScaledBitmap(mainPic, (int)((width-borderSize*2-picPreviewWidth)*shift + picPreviewWidth), (int)((height-borderSize*2-picPreviewHeight)*shift + picPreviewHeight), false);
-            canvas.drawBitmap(temp, borderSize, height-borderSize-temp.getHeight(), paint);
+            temp = Bitmap.createScaledBitmap(mainPic, (int)((1-shift)*picPreviewWidth + shift*winWidth), (int)((1-shift)*picPreviewHeight + shift*winHeight), false);
+            //canvas.drawBitmap(temp, borderSize, height-borderSize-temp.getHeight(), paint);
+            canvas.drawBitmap(temp, (int)((1-shift)*scoreFieldX + shift*winX), (int)((1-shift)*picFieldY + shift*winY), paint);
             temp.recycle();
             invalidate();
         } else {
             Bitmap temp = Bitmap.createScaledBitmap(mainPic, width-borderSize*2, height-borderSize*2, false);
-            canvas.drawBitmap(temp, borderSize, borderSize, paint);
+            temp = Bitmap.createScaledBitmap(mainPic, winWidth, winHeight, false);
+            canvas.drawBitmap(temp, winX, winY, paint);
         }
+    }
+
+    private int centerText() {
+        return (int) ((paint.descent() + paint.ascent()) / 2);
     }
 
     private Bitmap loadMainPic(Resources resources){

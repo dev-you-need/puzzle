@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Collect the picture</string>
+    <string name="chooseLevel">Choose level:</string>
+    <string name="clicks">Clicks</string>
+</resources>

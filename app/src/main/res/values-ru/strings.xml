@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Собери картину</string>
+    <string name="chooseLevel">Выберите уровень:</string>
+    <string name="clicks">Ходов</string>
+</resources>
