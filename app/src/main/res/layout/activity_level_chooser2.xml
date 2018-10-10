@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#5066ccff"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="@string/chooseLevel2"
+            android:id="@+id/tvChooseLevel"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:textColor="#ffffff" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        >
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel21"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel22"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel23"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel24"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel25"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel26"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel27"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel28"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel29"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel30"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel31"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel32"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel33"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel34"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel35"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel36"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel37"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel38"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel39"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="New ImageView"
+            android:id="@+id/idBtnLevel40"
+            android:layout_weight="1"
+            style="@style/LevelChooseButtons" />
+    </LinearLayout>
+</LinearLayout>

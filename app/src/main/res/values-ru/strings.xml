@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Собери картину</string>
-    <string name="chooseLevel">Выберите уровень:</string>
+    <string name="chooseLevel1">Выберите уровень (страница 1):</string>
     <string name="clicks">Ходов</string>
+    <string name="chooseLevel2">Выберите уровень (страница 2):</string>
 </resources>

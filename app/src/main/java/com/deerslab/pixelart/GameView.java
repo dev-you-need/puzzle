@@ -270,6 +270,50 @@ public class GameView extends View {
                 return BitmapFactory.decodeResource(resources, R.drawable.pic17);
             case 18:
                 return BitmapFactory.decodeResource(resources, R.drawable.pic18);
+            case 19:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic19);
+            case 20:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic20);
+            case 21:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic21);
+            case 22:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic22);
+            case 23:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic23);
+            case 24:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic24);
+            case 25:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic25);
+            case 26:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic26);
+            case 27:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic27);
+            case 28:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic28);
+            case 29:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic29);
+            case 30:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic30);
+            case 31:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic31);
+            case 32:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic32);
+            case 33:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic33);
+            case 34:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic34);
+            case 35:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic35);
+            case 36:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic36);
+            case 37:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic37);
+            case 38:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic38);
+            case 39:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic39);
+            case 40:
+                return BitmapFactory.decodeResource(resources, R.drawable.pic40);
             default:
                 return BitmapFactory.decodeResource(resources, R.drawable.pic1);
         }

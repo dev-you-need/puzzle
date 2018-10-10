@@ -6,9 +6,6 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
 
-import com.google.android.gms.analytics.HitBuilders;
-import com.google.android.gms.analytics.Tracker;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -33,7 +30,6 @@ public class Game {
     protected int[] partXYchoose = new int[2];
     private int valueChoose;
 
-    Tracker tracker;
     String TAG = this.getClass().getSimpleName();
 
     protected int clicks;
@@ -80,16 +76,6 @@ public class Game {
         gameState = GameState.MainGame;
 
         Log.d("usedCells size", usedCells.size()+"");
-
-
-        try {
-            tracker = AnalyticsTrackers.getTracker(context).get(AnalyticsTrackers.Target.APP);
-            tracker.setScreenName(TAG);
-            tracker.send(new HitBuilders.EventBuilder().setAction("Level " + currentLevel + " start").build());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void click(int coordX, int coordY){
@@ -177,12 +163,6 @@ public class Game {
             }
         }
 
-        try {
-            tracker.send(new HitBuilders.EventBuilder().setAction("Level " + currentLevel + " finish").build());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return true;
     }
 
@@ -224,11 +204,10 @@ public class Game {
                 picPartsY=5;
                 break;
             default:
-                picPartsX=4;
-                picPartsY=3;
+                picPartsX=6;
+                picPartsY=5;
                 break;
         }
-
     }
 
     public static Game getInstance(Context context1, GameView gameView1) {
@@ -244,5 +223,4 @@ public class Game {
     enum GameState{
         MainGame, Win
     }
-
 }
