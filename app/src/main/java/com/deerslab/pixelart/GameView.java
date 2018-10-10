@@ -21,8 +21,8 @@ public class GameView extends View {
     private final Paint paint = new Paint();
     private Typeface font;
 
-    private int width;
-    private int height;
+    protected int width;
+    protected int height;
     private int borderSize;
     private int gameField;
     private int picPreviewWidth;

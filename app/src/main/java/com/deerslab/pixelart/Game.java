@@ -80,77 +80,80 @@ public class Game {
 
     public void click(int coordX, int coordY){
 
-        switch (gameState) {
+        if(coordX > 0 && coordY > 0 && coordX < gameView.width && coordY < gameView.height) {
 
-            case MainGame:
+            switch (gameState) {
 
-                int partX;
-                int partY;
+                case MainGame:
 
-                Log.d("cond 1", "" + (coordX > +gameView.gameFieldX + picPartsX * gameView.picPartSizeX));
-                Log.d("cond 2", "" + (coordY > +gameView.gameFieldY + 2 * picPartsY * gameView.picPartSizeY));
-                Log.d("cond 3", "" + (coordX < +gameView.gameFieldX));
-                Log.d("cond 4", "" + (coordY < +gameView.gameFieldY));
+                    int partX;
+                    int partY;
 
-                if ((coordX > (gameView.gameFieldX + picPartsX * gameView.picPartSizeX))
-                        || (coordY > (gameView.gameFieldY + 2 * picPartsY * gameView.picPartSizeY))
-                        || coordX < gameView.gameFieldX
-                        || coordY < gameView.gameFieldY) {
-                    return;
-                } else {
-                    partX = (coordX - gameView.gameFieldX) / gameView.picPartSizeX;
-                    partY = (coordY - gameView.gameFieldY) / gameView.picPartSizeY;
+                    Log.d("cond 1", "" + (coordX > +gameView.gameFieldX + picPartsX * gameView.picPartSizeX));
+                    Log.d("cond 2", "" + (coordY > +gameView.gameFieldY + 2 * picPartsY * gameView.picPartSizeY));
+                    Log.d("cond 3", "" + (coordX < +gameView.gameFieldX));
+                    Log.d("cond 4", "" + (coordY < +gameView.gameFieldY));
 
-                    Log.d("choose partX=", "" + partX);
-                    Log.d("choose partY=", "" + partY);
-                    Log.d("partXYchoose", partXYchoose[0] + ", " + partXYchoose[1]);
+                    if ((coordX > (gameView.gameFieldX + picPartsX * gameView.picPartSizeX))
+                            || (coordY > (gameView.gameFieldY + 2 * picPartsY * gameView.picPartSizeY))
+                            || coordX < gameView.gameFieldX
+                            || coordY < gameView.gameFieldY) {
+                        return;
+                    } else {
+                        partX = (coordX - gameView.gameFieldX) / gameView.picPartSizeX;
+                        partY = (coordY - gameView.gameFieldY) / gameView.picPartSizeY;
 
-                    valueChoose = picPartsField[partX][partY];
-                    if (!picPartsCatch[valueChoose % picPartsX][valueChoose / picPartsX]) {
-                        Log.d("alreadyChoose", "" + alreadyChoose);
-                        if (alreadyChoose) {
-                            Log.d("partX==partXYchoose[0]", "" + (partX == partXYchoose[0]));
-                            Log.d("partY==partXYchoose[1]", "" + (partY == partXYchoose[1]));
-                            if ((partX == partXYchoose[0]) && (partY == partXYchoose[1])) {
-                                alreadyChoose = false;
-                            } else {
-                                Log.d("sovpadaet?", "" + (picPartsField[partX][partY] == picPartsField[partXYchoose[0]][partXYchoose[1]]));
-                                if (picPartsField[partX][partY] == picPartsField[partXYchoose[0]][partXYchoose[1]]) {
-                                    valueChoose = picPartsField[partX][partY];
-                                    picPartsCatch[valueChoose % picPartsX][valueChoose / picPartsX] = true;
+                        Log.d("choose partX=", "" + partX);
+                        Log.d("choose partY=", "" + partY);
+                        Log.d("partXYchoose", partXYchoose[0] + ", " + partXYchoose[1]);
+
+                        valueChoose = picPartsField[partX][partY];
+                        if (!picPartsCatch[valueChoose % picPartsX][valueChoose / picPartsX]) {
+                            Log.d("alreadyChoose", "" + alreadyChoose);
+                            if (alreadyChoose) {
+                                Log.d("partX==partXYchoose[0]", "" + (partX == partXYchoose[0]));
+                                Log.d("partY==partXYchoose[1]", "" + (partY == partXYchoose[1]));
+                                if ((partX == partXYchoose[0]) && (partY == partXYchoose[1])) {
                                     alreadyChoose = false;
+                                } else {
+                                    Log.d("sovpadaet?", "" + (picPartsField[partX][partY] == picPartsField[partXYchoose[0]][partXYchoose[1]]));
+                                    if (picPartsField[partX][partY] == picPartsField[partXYchoose[0]][partXYchoose[1]]) {
+                                        valueChoose = picPartsField[partX][partY];
+                                        picPartsCatch[valueChoose % picPartsX][valueChoose / picPartsX] = true;
+                                        alreadyChoose = false;
+                                    }
                                 }
-                            }
 
-                        } else {
-                            partXYchoose[0] = partX;
-                            partXYchoose[1] = partY;
-                            alreadyChoose = true;
+                            } else {
+                                partXYchoose[0] = partX;
+                                partXYchoose[1] = partY;
+                                alreadyChoose = true;
+                            }
+                        }
+
+                        clicks++;
+                    }
+
+                    if (endGameCheck()) {
+                        gameState = GameState.Win;
+                        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+                        SharedPreferences.Editor editor = settings.edit();
+
+                        if (settings.getInt("maxLevel", 1) == currentLevel) {
+                            editor.putInt("maxLevel", currentLevel + 1);
+                            editor.apply();
                         }
                     }
+                    gameView.invalidate();
 
-                    clicks++;
-                }
+                    break;
 
-                if (endGameCheck()) {
-                    gameState = GameState.Win;
-                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
-                    SharedPreferences.Editor editor = settings.edit();
+                case Win:
+                    GameActivity.activity.finish();
+                    context.startActivity(new Intent(context, LevelChooserActivity.class));
 
-                    if (settings.getInt("maxLevel", 1) == currentLevel){
-                        editor.putInt("maxLevel", currentLevel+1);
-                        editor.apply();
-                    }
-                }
-                gameView.invalidate();
-
-                break;
-
-            case Win:
-                GameActivity.activity.finish();
-                context.startActivity(new Intent(context, LevelChooserActivity.class));
-
-                break;
+                    break;
+            }
         }
     }
 
